@@ -65,6 +65,41 @@ const App = {
         delProductModal.show();
       }
     },
+    delProduct() {
+      const url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.catchProduct.id}`;
+
+      axios
+        .delete(url)
+        .then((res) => {
+          alert(res.data.message);
+          delProductModal.hide();
+          this.getData();
+        })
+        .catch((err) => {
+          alert(err.res.data.message);
+        });
+    },
+    updateProduct() {
+      const url = this.isNew
+        ? `${this.apiUrl}/api/${this.apiPath}/admin/product`
+        : `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.catchProduct.id}`;
+
+      const httpMethod = this.isNew ? "post" : "put";
+
+      axios[httpMethod](url, { data: this.catchProduct })
+        .then((res) => {
+          alert(res.data.message);
+          productModal.hide();
+          this.getData();
+        })
+        .catch((error) => {
+          alert(error.res.data.message);
+        });
+    },
+    newImages() {
+      this.tempProduct.imagesUrl = [];
+      this.tempProduct.imagesUrl.push("");
+    },
   },
 };
 Vue.createApp(App).mount("#app");

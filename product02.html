@@ -156,7 +156,7 @@
                     <div v-else>
                       <button
                         class="btn btn-outline-primary btn-sm d-block w-100"
-                        @click="createImages"
+                        @click="newImages"
                       >
                         新增圖片
                       </button>
@@ -272,7 +272,13 @@
               >
                 取消
               </button>
-              <button type="button" class="btn btn-primary">確認</button>
+              <button
+                @click="updateProduct"
+                type="button"
+                class="btn btn-primary"
+              >
+                確認
+              </button>
             </div>
           </div>
         </div>
@@ -301,7 +307,8 @@
             </div>
             <div class="modal-body">
               是否刪除
-              <strong class="text-danger"></strong> 商品(刪除後將無法恢復)。
+              <strong class="text-danger">{{ catchProduct.title }}</strong>
+              商品(刪除後將無法恢復)。
             </div>
             <div class="modal-footer">
               <button
@@ -311,7 +318,9 @@
               >
                 取消
               </button>
-              <button type="button" class="btn btn-danger">確認刪除</button>
+              <button @click="delProduct" type="button" class="btn btn-danger">
+                確認刪除
+              </button>
             </div>
           </div>
         </div>

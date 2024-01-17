@@ -51,14 +51,16 @@ const App = {
     },
     openModal(isNew, item) {
       if (isNew === "new") {
+        //是新的就給予全空的catchProduct
         this.catchProduct = {
           imagesUrl: [],
         };
         this.isNew = true;
         productModal.show();
       } else if (isNew === "edit") {
+        //是既有的就複製catchProduct本身
         this.catchProduct = { ...item };
-        this.isNew = false;
+        this.isNew = false; // 方便去API的時候可以辨別資料要post 還是 put
         productModal.show();
       } else if (isNew === "delete") {
         this.catchProduct = { ...item };
@@ -67,7 +69,7 @@ const App = {
     },
     delProduct() {
       const url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.catchProduct.id}`;
-
+      ///這邊因為catchProduct.id直接提取id即可
       axios
         .delete(url)
         .then((res) => {
@@ -97,6 +99,7 @@ const App = {
         });
     },
     newImages() {
+      //把心照片推進去
       this.tempProduct.imagesUrl = [];
       this.tempProduct.imagesUrl.push("");
     },
